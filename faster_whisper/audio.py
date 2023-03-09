@@ -31,7 +31,7 @@ def decode_audio(input_file, sampling_rate=16000):
     raw_buffer = io.BytesIO()
     dtype = None
 
-    with av.open(input_file) as container:
+    with av.open(input_file, options={"err_detect": "ignore_err"}) as container:
         frames = container.decode(audio=0)
         frames = _group_frames(frames, 500000)
         frames = _resample_frames(frames, resampler)
